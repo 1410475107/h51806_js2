@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>H5音乐播放器</title>
+		<link rel="stylesheet" type="text/css" href="css/music.css" />
+	</head>
+
+	<body>
+		<div class="clear">
+
+	<div class="box">
+		<div class="mvList">
+			<div class="touXiang">
+				<span class="username">qq181_喜剧之王</span>
+			</div>
+			<div class="ll">
+				<img src="img/recommend.png" class="on" alt="今日推荐" />
+				<span>今日推荐</span>
+			</div>
+			<div class="ll">
+				<img src="img/ranking.png" class="tw" alt="最新排行" />
+				<span>最新排行</span>
+			</div>
+			<div class="ll">
+				<img src="img/download.png" class="th" alt="下载管理" />
+				<span>下载管理</span>
+			</div>
+			<div class="vidL ll">
+				<img src="img/videoList.png" class="fou" alt="默认列表" />
+				<span>默认列表</span>
+				<div class="myVideo">
+					<p class="missYou">吴亦凡&赵丽颖.想你</p>
+					<p class="summer">夏有乔木雅望天堂</p>
+					<p class="chuQiao">楚乔传</p>
+					<p class="hqg">花千骨</p>
+					<p class="yanZhi">胭脂</p>
+				</div>
+			</div>
+			<div class="ll">
+				<img src="img/cloudDisc.png" class="fiv" alt="我的云盘" />
+				<span>我的云盘</span>
+			</div>
+			<div class="ll">
+				<img src="img/like.png" class="six" alt="我的收藏" />
+				<span>我的收藏</span>
+			</div>
+			<div class="ll">
+				<img src="img/recentlyPlay.png" class="eig" alt="最近播放" />
+				<span>最近播放</span>
+			</div>
+			<div class="ll bJimg">
+				<img src="img/myBgimg.png" class="nin" alt="我的背景图" />
+				<span>我的背景</span>
+				<div class="qieHuan">
+					<p class="lunBo">背景轮播</p>
+					<p class="fixe">背景固定</p>
+				</div>
+			</div>
+			<div class="ll we">
+				<img src="img/moreHidden.png" class="sen" alt="更多隐藏" />
+				<span>更多</span>
+				<div class="moreDiv">
+					<ul>
+						<li>点播券</li>
+						<li>会员尊享</li>
+						<li>付费专区</li>
+						<li>猜你喜欢</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="video">
+			<!--模块化区分-->
+			<video id="vid" src="videos/one.mp4" width="100%" height="100%" autoplay=""></video>
+			<div class="con">
+				<div class="con_top">
+					<div class="con_top_pro"></div>
+					<div class="con_top_btn"></div>
+				</div>
+				<div class="con_left">
+					<div class="control prior"></div>
+					<div class="control play cor"></div>
+					<div class="control next cor"></div>
+					<div class="control loop cor"></div>
+					<div class="control time">
+						<span class="dis">00:00</span>/<span class="total">06:08</span>
+					</div>
+				</div>
+				<div class="con_right">
+					<div class="control definition conde">画质
+						<div class="huaZhi">
+							<span class="biaoQing">标清</span>
+							<span class="gaoQing">高清</span>
+						</div>
+					</div>
+					<div class="control speed conde">倍速
+						<div class="speedAdd">
+							<span class="speedone">倍速x1</span>
+							<span class="speedtwo">倍速x2</span>
+							<span class="speedfour">倍速x4</span>
+						</div>
+					</div>
+					<div class="control cor volume">
+						<div class="range"><input type="range" class="vol_con" min="0" max="100" value="100"></div>
+					</div>
+					<div class="control cor setting"></div>
+					<div class="control cor danMu"></div>
+					<div class="control cor full"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<ul>
+		<li><img src="img/lione.jpg" alt="图片" /></li>
+		<li><img src="img/litwo.jpg" alt="图片" /></li>
+		<li><img src="img/lithree.jpg" alt="图片" /></li>
+		<li><img src="img/lifour.jpg" alt="图片" /></li>
+		<li><img src="img/lifive.jpg" alt="图片" /></li>
+	</ul>
+</div>
+		
+		<script type="text/javascript">
+			let clear = document.querySelector('.clear');
+			let con = document.querySelector('.con');
+			let play = document.querySelector('.play');
+			let video = document.querySelector('.video');
+			let vid = document.getElementById('vid');
+			let btn = document.querySelector('.con_top_btn');
+			let con_top = document.querySelector('.con_top');
+			let pro = document.querySelector('.con_top_pro');
+			let volume = document.querySelector('.volume');
+			let full = document.querySelector('.full');
+			let vol_con = document.querySelector('.vol_con');
+			let dis = document.querySelector('.dis');
+			let total = document.querySelector('.total');
+			let prior = document.querySelector('.prior');
+			let next = document.querySelector('.next');
+			let loop = document.querySelector('.loop');
+			let speed = document.querySelector('.speed');
+			let speedone = document.querySelector('.speedone');
+			let speedtwo = document.querySelector('.speedtwo');
+			let speedfour = document.querySelector('.speedfour');
+			let biaoQing = document.querySelector('.biaoQing');
+			let gaoQing = document.querySelector('.gaoQing');
+			let danMu = document.querySelector('.danMu');
+			let missYou = document.querySelector('.missYou');
+			let summer = document.querySelector('.summer');
+			let chuQiao = document.querySelector('.chuQiao');
+			let hqg = document.querySelector('.hqg');
+			let yanZhi = document.querySelector('.yanZhi');
+			let sen = document.querySelector('.sen');
+			let moreDiv = document.querySelector('.moreDiv');
+			let pic = document.querySelectorAll(".clear ul li img");
+			let lunBo = document.querySelector(".lunBo");
+			let fixe = document.querySelector(".fixe");
+//			let qieHuan = document.querySelector(".qieHuan");
+			let bJSrcArr = ["img/lione.jpg","img/litwo.jpg","img/lithree.jpg","img/lifour.jpg","img/lifive.jpg"];
+			let srcArr = ["videos/one.mp4", "videos/two.mp4", "videos/three.mp4", "videos/four.mp4", "videos/five.mp4"];
+
+			let timer = null;
+			let mark = true;
+			play.onclick = function() {
+				if (mark) {
+					vid.play(); //点击播放
+					timer = setInterval(nowTime, 1000);
+				} else {
+					vid.pause(); //点击暂停
+				}
+				mark = !mark;
+			}
+
+			//			进度条
+			function nowTime() {
+				//视频播放的是以秒为单位
+				//获取当前时间的分钟数  当前时间
+				let minutes1 = Math.floor(vid.currentTime / 60);
+				//获取当前时间的秒数
+				let minutes = Math.floor(vid.currentTime % 60);
+				//判断分钟数和秒数<10时，在分钟数和秒数之前加0
+				if (minutes1 < 10) {
+					if (minutes < 10) {
+						dis.innerHTML = 0 + (minutes1 + ':' + 0 + minutes);
+					} else {
+						dis.innerHTML = 0 + (minutes1 + ':' + minutes);
+					}
+				}
+				
+				//总时间
+				let dminutes1 = Math.floor(vid.duration / 60);
+				let dminutes = Math.floor(vid.duration % 60);
+				if (dminutes1 < 10) {
+					if (dminutes < 10) {
+						total.innerHTML = 0 + (dminutes1 + ':' + 0 + dminutes);
+					} else {
+						total.innerHTML = 0 + (dminutes1 + ':' + dminutes);
+					}
+				}
+				
+				//当前播放的进度比 当前播放时间/总的时间
+				let n = vid.currentTime / vid.duration;
+				let btnw = btn.getBoundingClientRect().width;
+				let con_topw = con_top.getBoundingClientRect().width;
+				btn.style.left = n * con_top.offsetWidth + 'px'; //乘以进度条总的宽度
+				if (btn.offsetLeft >= con_topw - btnw) {
+					btn.style.left = con_topw - btnw + "px";
+				}
+
+				//进度条的颜色变化
+				pro.style.width = n * con_top.offsetWidth + 'px';
+			}
+
+			btn.onmousedown = function(e) {
+				let x = e.clientX - this.offsetLeft;
+				document.onmousemove = function(e) {
+					let mousex = e.pageX || e.clientX;
+					//获取当前鼠标的位置		
+					let _left = mousex - x;
+					btn.style.left = _left + 'px';
+					pro.style.width = _left + 'px';
+					let n = _left / con_top.offsetWidth;
+					vid.currentTime = n * vid.duration;
+					nowTime();
+				}
+				document.onmouseup = function(e) {
+					//清除移动函数因为鼠标已经离开了，并获取当前移动距离
+					document.onmousemove = 'null';
+					document.onmouseup = 'null';
+				}
+			}
+
+			//设置全屏
+			full.onclick = function() {
+				vid.webkitRequestFullScreen();
+			}
+
+			//设置音量
+			vol_con.onchange = function() {
+				vid.volume = vol_con.value / 100;
+				if(vol_con.value == 0){
+					volume.style.backgroundImage = "URL('img/silence.png')";
+					volume.style.backgroundSize = "23px 23px";
+					volume.style.backgroundPositionX = "5px";
+				}else{
+					volume.style.backgroundImage = "URL('img/icon1.png')";
+					volume.style.backgroundSize = "";
+					volume.style.backgroundPositionX = "-330px";
+				}
+			}
+
+			//点击播放下一个视频，获取到播放的视频的src
+			let num = 0;
+			next.onclick = function() {
+				vid.src = srcArr[++num % srcArr.length];
+				vid.load();
+			}
+
+			//点击播放上一个视频
+			prior.onclick = function() {
+				vid.src = srcArr[(--num) % srcArr.length];
+				if (num < 0) {
+					num = srcArr.length - 1;
+					vid.src = srcArr[num];
+				}
+				vid.load();
+			}
+			
+			//循环播放和禁止循环播放的图片切换
+			let flag1 = true;
+			loop.onclick = function() {
+				if (flag1) {
+					this.style.backgroundImage = "URL('img/loop.png')";
+					this.style.backgroundSize = "19px 19px";
+					this.style.backgroundPositionX = "10px";
+				} else {
+					this.style.backgroundImage = "URL('img/icon1.png')";
+					this.style.backgroundSize = "";
+					this.style.backgroundPositionX = "-190px";
+				}
+				flag1 = !flag1;
+			}
+
+			//视频播放完之后自动播放下一个
+			vid.addEventListener('pause', pauseAd);
+			function pauseAd() {
+				if (vid.currentTime == vid.duration) {
+					if (flag1) {//通过flag1判断和num的值来设置禁止循环播放功（默认不循环）
+						this.src = srcArr[++num % srcArr.length];
+					} else {//通过flag1判断和num的值来设置循环播放功能
+						//切换视频  可以在视频列表里面动态获取
+						this.src = srcArr[num % srcArr.length];
+					}
+					//视频重新加载一次  不然不会切换成新的视频
+					this.load();
+				}
+			}
+
+			//设置播放速度 
+			speedone.onclick = function() {
+				//确定视频的playbackRate默认值console.log(vid.playbackRate); 是1
+				//点击事件里面设置成固定值，避免累加或累乘效应
+				vid.playbackRate = 1;
+			}
+			speedtwo.onclick = function() {
+				vid.playbackRate = 2;
+			}
+			speedfour.onclick = function() {
+				vid.playbackRate = 4;
+			}
+
+			//设置视频清晰度（只做了第一个视频的）
+			biaoQing.onclick = function() {
+				vid.src = 'videos/one1.mp4';
+				vid.load();
+			}
+			gaoQing.onclick = function() {
+				vid.src = 'videos/one.mp4';
+				vid.load();
+			}
+
+			//设置视频列表播放当前点击的视频,并且改变对应的num值，改变num是为了不影响上面的next和previous
+			missYou.onclick = function() {
+				num = 0;
+				vid.src = srcArr[0];
+			}
+			summer.onclick = function() {
+				num = 1;
+				vid.src = srcArr[1];
+			}
+			chuQiao.onclick = function() {
+				num = 2;
+				vid.src = srcArr[2];
+			}
+			hqg.onclick = function() {
+				num = 3;
+				vid.src = srcArr[3];
+			}
+			yanZhi.onclick = function() {
+				num = 4;
+				vid.src = srcArr[4];
+			}
+
+			//页面侧边导航的 "更多" 点击 效果 
+			let sensrc = true;
+			sen.onclick = function() {
+				if (sensrc) {
+					this.src = 'img/more.png';
+					moreDiv.style.display = 'block';	
+				} else {
+					this.src = 'img/moreHidden.png';
+					moreDiv.style.display = 'none';
+				}
+				sensrc = !sensrc;
+			}
+			
+			//设置背景的轮播 fn函数	
+			let j = 0;
+			function fn(){
+				for(let i=0;i<pic.length;i++){
+					pic[i].style.display = "none";
+				}
+				pic[j++%pic.length].style.display = "";	
+			}
+			
+			//添加轮播的定时器 添加点击事件，用户自己控制轮播与否
+			let sid = 0;
+			//点击轮播，背景图开始轮播(默认不轮播)
+			lunBo.onclick = function(){	
+				clearInterval(sid);
+				this.style.color = "#FF5500";
+				fixe.style.color = '';
+				sid = setInterval(fn,5000);
+			}
+			//用户点击固定背景就清除定时器，不轮播
+			fixe.onclick = function(){
+				lunBo.style.color = '';
+				this.style.color = "#FF5500";
+				clearInterval(sid);
+			}
+		</script>
+	</body>
+</html>

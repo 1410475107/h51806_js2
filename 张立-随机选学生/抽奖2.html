@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<title></title>
+		<style>
+			#d1 {
+				width: 600px;
+				height: 300px;
+				text-align: center;
+				margin: 100px auto;
+				position: relative;
+				overflow: hidden;
+			}
+			#d0 {
+				width: 900px;
+				margin: 0px auto;
+				position: relative;
+			}
+			#btn1 {
+				width: 200px;
+				height: 50px;
+				margin: 0px auto;
+				position: absolute;
+				top: 250px;
+				left:200px ;
+				color: #fff;
+				background-color: #337ab7;
+				border-color: #2e6da4;
+				font-size: 16px;
+				font-weight: 400;
+				text-align: center;
+				cursor: pointer;
+				border: 1px solid transparent;
+				border-radius: 4px;
+				outline: none;
+			}
+			#p1 {
+				font-size: 36px;
+				font-weight: 900;
+				margin-top: -9px;
+				width: 140px;
+				margin-left: 222px;
+			}
+			.dong {
+				animation: mydong 1s infinite;
+				color: red !important;
+				font-size:20px;
+				font-weight:900;
+			}
+			
+			@keyframes mydong
+			{
+			0%   {font-size: 14px;}
+			50%  {font-size: 40px;}
+			100% {font-size: 12px;}
+			}
+			
+			#d2 {
+				width: 600px;
+				height: 600px;
+				position: absolute;
+				font-size: 20px;
+				font-weight: 900;
+				transform-origin:300px 300px ;
+				top: 100px;
+				display: none;
+			}
+			span {
+				display: inline-block;
+				position: absolute;
+				top: -100px;
+				left: 260px;
+				width: 80px;
+				text-align: center;
+				height: 26px;
+			}
+			.mohu {
+				width: 200px;
+				height: 250px;
+				/* background-color: #337AB7; */
+				background-color: hsla(0,0%,100%,0.86);
+				filter: blur(4px);
+				position: absolute;
+				top: 0px;
+			}
+			#mohu1 {
+				left: 100px;
+			}
+			#mohu2 {
+				right: 100px;
+			}
+			img {
+				position: absolute;
+				bottom: 70px;
+				left: 350px;
+				width: 187px;
+				transform: rotateZ(-8deg);
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div id="d0">
+			<div id="d1" >
+				<div id="d2"></div>
+				<p id="p1" >英雄</p>
+				<input   id="btn1" type="button" value="开始" />
+			</div>
+			<!-- 模糊效果 -->
+			<div id="mohu1" class="mohu"></div>
+			<div id="mohu2" class="mohu"></div>
+			
+			 <!--箭头 -->
+			 <img src="重生.png"/>
+		</div>
+		
+
+			<script>
+				var arr1=["谭覃","曹华胜","侯钰相","田仁杰","方思林","罗番","王烁棚","付代兵","王兰","夏敏","吴海荣","王乙霖","王秋梅","曹放","刘藉慧","巫晓娟","李露","晏继梅","徐宁","刘桐","张明浩","徐晓杨","陈彦","李强","彭剑锋","欧阳柯","陈雪平","任云飞","杜康","杨莊","徐建","任敏","骆毅","洪星","邓坚","肖宇"];
+				var p1 =document.getElementById("p1");
+				var btn1=document.getElementById("btn1");
+				var d1 =document.getElementById("d1");
+				var d2 =document.getElementById("d2");
+
+				
+				//构建扇形
+				for (var nu=0;nu<36;nu++){
+					var span1 = document.createElement('span');
+					span1.innerText=arr1[nu];
+					// span1.style.trsform="rotate("+nu*10+"deg)"
+					d2.appendChild(span1);
+				}
+				
+				var span2=document.querySelectorAll('span');
+				for (var n=0;n<36;n++){
+					span2[n].style.transformOrigin="40px 400px";
+					span2[n].style.transform="rotateZ("+n*10+"deg)"
+				}
+				
+				//点击事件
+				btn1.addEventListener('click',start);
+				function start (){
+					
+					//点击开始
+
+					if(btn1.value=="开始"){
+						d2.style.display="block"
+						p1.style.display="none"
+						jiaodu=10;
+						starttime = window.setInterval(function(){
+							d2.style.transform="rotateZ("+jiaodu+"deg)"
+							jiaodu=jiaodu+10;
+						},100);
+						btn1.value="停止";
+					//点击结束
+					
+					} else if(btn1.value=="停止") {
+						var time=10;
+						btn1.classList.add('dong');
+						btn1.value=time;
+						
+						//数字倒计时
+						endtime = window.setInterval(function(){
+							time--;
+							btn1.value=time;
+							if(time<1){
+								btn1.classList.remove('dong')
+								btn1.value="上吧"
+								window.clearInterval(endtime);
+								window.clearInterval(starttime);
+								
+								console.log(jiaodu);
+								var whonu=37-(jiaodu%360)/10;
+								var who=arr1[whonu];
+								console.log(arr1[who]);
+								setTimeout(function(){
+									d2.style.display="none";
+									p1.style.display="block";
+									p1.innerHTML=who;
+								},2000)
+								//恢复到开始
+								setTimeout(function(){
+									btn1.value="开始";
+									starttime=window.setInterval;
+								},5000)
+							}
+						},1000);
+					}
+					
+				}
+				
+				
+			</script>
+		
+		
+	</body>
+</html>

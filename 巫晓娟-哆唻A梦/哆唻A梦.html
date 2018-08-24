@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>哆唻A梦</title>
+    <style>
+     #mycanvas{
+      border: 1px solid rosybrown;
+      margin-left: 350px;
+
+    }
+    </style>
+</head>
+<body>
+    <canvas id="mycanvas" width="400px" height="600px"></canvas>
+    <script>
+   var canvas=document.getElementById('mycanvas');
+   var context=canvas.getContext('2d');
+      //头部  
+   context.beginPath();
+   context.lineWidth = 1;
+   context.strokeStyle = '#000';
+   context.arc(200, 175, 175, Math.PI/180*125,  Math.PI/180*54);
+   context.fillStyle = '#0bb0da';
+   context.fill();
+   context.stroke();
+   //画脸
+   context.beginPath();
+   context.fillStyle = '#fff';
+   context.moveTo(100, 100);
+   context.quadraticCurveTo(-10, 200, 120, 315);//创建二次贝塞尔曲线,控制点(-10,200),结束点(120,315)
+   context .lineTo(280, 315);
+   context.quadraticCurveTo(400, 210, 290, 100);
+        context.lineTo(100, 100);
+        context.fill();
+        context.stroke();
+   //画眼睛起点x.起点y,半径x,半径y,旋转的角度，起始角，结果角，顺时针还是逆时针
+   context.beginPath();
+   context.ellipse(138,120,50,60,0,0,Math.PI*2);
+   context.fillStyle="white";
+   context.strokeStyle="#000";
+   context.fill();
+   context.stroke();
+   context.beginPath();
+   context.ellipse(242,120,50,60,0,0,Math.PI*2);
+   context.fillStyle="white";
+   context.strokeStyle="#000";
+   context.fill();
+   context.stroke();
+   //画眼球
+   context.beginPath();
+   context.strokeStyle = '#000';
+   context.arc(154, 152, 20, 0,  Math.PI*2);
+   context.fillStyle = 'black';
+   context.fill();
+   context.stroke();
+   context.beginPath();
+   context.strokeStyle = '#000';
+   context.arc(226, 152, 20, 0,  Math.PI*2);
+   context.fillStyle = 'black';
+   context.fill();
+   context.stroke();
+   //画鼻子
+   context.beginPath();
+   context.strokeStyle = '#000';
+   context.arc(192, 184, 28, 0,  Math.PI*2);
+   context.fillStyle = 'orange';
+   context.fill();
+   context.stroke();
+   //鼻子线
+   context.beginPath();
+   context.moveTo(194,222);
+   context.lineTo(194,282);
+   context.stroke();
+   //胡须
+   context.beginPath();
+   context.moveTo(80, 200);
+   context.lineTo(170, 235);
+   context.moveTo(80, 230);
+   context.lineTo(166, 246);
+   context.moveTo(80, 256);
+   context.lineTo(168, 256);
+   context.stroke();
+   context.beginPath();
+   context.moveTo(216, 235);
+   context.lineTo(308, 200);
+   context.moveTo(216, 246);
+   context.lineTo(308, 230);
+   context.moveTo(216, 256);
+   context.lineTo(308, 256);
+   context.stroke();
+   //画嘴
+   context.beginPath();
+//    context.moveTo(80, 240);
+   context.arc(194, 234,80, Math.PI/180*30, Math.PI/180*150);
+   context.stroke();
+   //画围巾
+   context.beginPath();
+   context.moveTo(72, 316);
+   context.lineTo(325, 316);
+   context.arc(300, 320,30,Math.PI/180*-10, Math.PI/180*40);
+
+   context.lineTo(72, 340);
+  context .arc(100, 340,35,Math.PI/180*-180, Math.PI/180*-140);
+  context.fillStyle = '#b13209';
+  context.fill();
+//衣服
+context.beginPath();
+context.fillStyle = '#0bb0da';
+context.moveTo(80, 338);
+        //左衣服
+        context.lineTo(26, 406);
+        context.lineTo(65, 440);
+        context.lineTo(85, 418);
+        context.lineTo(85, 528);
+        context.lineTo(185, 528);
+        //右衣服
+        context.lineTo(315, 528);
+        context.lineTo(315, 418);
+        context.lineTo(337, 440);
+        context.lineTo(374, 406);
+        context.lineTo(320, 338);
+        context.fill();
+   context.stroke();
+   //肚子
+context.beginPath();
+   context.lineWidth = 1;
+   context.strokeStyle = '#000';
+   context.arc(200, 390, 91, 1.8 * Math.PI, 1.2 * Math.PI);
+   context.fillStyle = 'white';
+   context.fill();
+   context.stroke();
+//左手
+context.beginPath();
+context.fillStyle = '#fff';
+context.arc(37, 433, 30, 0, 2 * Math.PI);
+context.fill();
+context.stroke();
+//右手
+context.beginPath();
+context.fillStyle = '#fff';
+context.arc(363, 433, 30, 0, 2 * Math.PI);
+context.fill();
+context.stroke();
+//口袋
+context.beginPath();
+context.fillStyle = '#fff';
+context.moveTo(130, 380);
+context.lineTo(270, 380);
+context .arc(200, 388,71,0, Math.PI/180*185);
+
+context.fill();
+context.stroke();
+//尾巴
+context.beginPath();
+context.fillStyle = '#fff';
+context.arc(200, 529, 20,Math.PI, 0);
+context.fill();
+context.stroke();
+//脚
+context.beginPath();
+context.fillStyle='#fff';
+context.arc(76,544, 16, Math.PI / 180 * 90, Math.PI / 180 *270);
+context.lineTo(72,528);
+context.arc(176,544, 16, Math.PI / 180 * -90, Math.PI / 180 *90);
+context.lineTo(74,560);
+context.fill();
+context.stroke();
+
+context.beginPath();
+context.fillStyle='#fff';
+context.arc(226,544, 16, Math.PI / 180 * 90, Math.PI / 180 *270);
+context.arc(320,544, 16, Math.PI / 180 * -90, Math.PI / 180 *90);
+context.lineTo(226,560);
+context.fill();
+context.stroke();
+    </script> 
+</body>
+</html>

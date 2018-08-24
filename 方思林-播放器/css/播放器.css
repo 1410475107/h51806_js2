@@ -1,0 +1,224 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+li {
+	list-style-type: none;
+}
+#bofangqi {
+	width: 800px;
+	height: 500px;
+    border: 1px solid;
+    position: absolute;
+    top: 10px;
+    left: 150px;
+    background-color: black;
+   }
+   
+#header {
+	width: 800px;
+	height: 100px;
+    position: absolute;
+    top: 0;
+    }
+.logo {
+	width:250px;
+	height: 100px;
+	background-image: url(../img/logo.jpg);
+	background-repeat: no-repeat;
+	background-position: 10px 1px;
+	background-size: 100px 100px;
+	line-height: 110px;
+	text-align:center;
+	text-indent: 2em;
+    font-size: 30px;
+    font-family:"圆体" ;
+    color: whitesmoke;
+	position: absolute;  
+}
+.trues {
+	width:120px;
+	height: 30px;
+	position: absolute;
+	top:5px;
+	right: 5px;
+	display: flex;
+	justify-content: space-around;
+}
+.trues div {
+	width: 30px;
+	height: 25px;
+	border-radius: 3px;	
+	background-repeat: no-repeat;
+	background-position: 5px 2px;
+	background-size:20px 20px ;
+	background-color: black;
+}
+.t1 {
+	background-image: url(../img/衣服.png);
+}
+.t2 {	
+	background-image: url(../img/最小化.png);
+}
+.t3 {	
+	background-image: url(../img/缩小.png);
+}
+.t4 {
+	background-image: url(../img/关闭4.png);
+}
+
+#center {
+	width: 800px;
+	height: 350px;
+    position: absolute;
+    top: 100px;
+    }
+
+#center_left {
+	width: 250px;
+	height: 350px;
+    position: absolute; 
+    top: 0px; 
+    }
+.mt {
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+	position: absolute;
+	top: 40px;
+	left: 25px;
+	background-position: -88px 0px;	
+
+}
+#img {
+	width: 200px;
+	height: 200px;
+	position: absolute;
+	border-radius: 50%;
+}
+
+.mz {
+	width: 100%;
+	height: 70px;
+	position: absolute;
+	top: 280px;
+	
+}
+.mz ul {
+	display: block;
+	width: 200px;
+	height: 50px;
+	position: absolute;
+    top:0px;
+    left: 25px;
+    display: flex;
+    justify-content: space-around; 
+}
+.mz ul li {
+	display: block;
+	width: 40px;
+	height: 40px;
+	font-size: 12px;
+	text-align: center;
+	line-height: 80px;
+	background-size: 20px 20px;
+	background-repeat: no-repeat;
+	background-position: 10px 10px;
+	color: #dbdbdb;
+}
+
+.like {
+	background-image: url(../img/心2.png);
+}
+.download {
+	background-image:url(../img/下载.png);
+}
+.comment {
+	background-image: url(../img/评论.png);
+}
+.forward {
+	background-image: url(../img/分享2.png);
+}
+#center_right {
+	width: 550px;
+	height: 350px;
+    position: absolute;
+    right: 0px;
+   }
+#gecik {
+	width: 400px;
+	height: 300px;
+	position: absolute;
+	left: 75px;
+	top: 20px;
+	overflow: hidden;
+} 
+#geci {
+	width: 300px;
+	height: 300px;
+	position: absolute;
+	top: 160px;
+    text-align: center;
+    }
+#audio {
+	width: 800px;
+	height: 50px;
+    position: absolute;
+    bottom: 0px;
+}
+
+.audio-controller {
+	display:block;
+	width: 150px;
+	height: 40px;
+    display: flex;
+    justify-content:space-around;
+    position: absolute;
+    left: 50px;
+    top: 5px;
+}
+
+.audio-controller li {
+	display: block;
+	width: 40px;
+	height: 40px;
+	background-repeat: no-repeat;
+	
+}
+.audio_prev,
+.audio_next {
+	background-size: 30px 30px;
+    background-position: 5px 5px;     
+}
+.audio_prev {
+	background-image: url(../img/上一首.png);
+}
+.audio_state {
+	background-size: 40px 40px;
+	background-image: url(../img/播放1.png);
+}
+.audio_next {
+	background-image: url(../img/下一首.png);
+}
+
+.audio_bar {
+	width: 500px;
+	height: 50px;
+	position: absolute;
+	left: 250px;
+}
+.audio_time_urrent {
+	width: 50px;
+	height: 50px;
+	position: absolute;
+	background-color: pink;
+}
+.audio_progress {
+	width: 400px;
+	height: 6px;
+	border-radius: 3px ;
+	background-color: white ;
+	position: absolute;
+	top: 22px;
+	left: 50px;
+}

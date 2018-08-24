@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>flappybird</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+        /* 游戏界面 */
+        .interface {
+            position: relative;
+            top: 0px;
+            left: 250px;
+        }
+        /* 背景云朵 */
+        .bgc {
+            height: 500px;
+            width: 800px;
+            background-image: url(./img/bgc.jpg);
+            background-position: 50% 50%;
+            background-size: cover;
+            overflow: hidden;
+            position: relative;
+        }
+        /* 上方柱子 */
+        .pillarTop {
+            width: 50px;
+            position: absolute;
+            top: 0;
+            background-image: url(./img/pillar.png);
+            background-position: 50% 50%;
+            background-size: cover;
+
+        }
+        /* 下方柱子 */
+        .pillarBottom {
+            width: 50px;
+            position: absolute;
+            bottom: 0;
+            background-image: url(./img/pillar3.png);
+            background-position: 50% 50%;
+            background-size: cover;
+
+        }
+    /* 小鸟 */
+        .bird {
+            width: 50px;
+            height: 50px;
+            background-image: url(./img/flappy.gif);
+            background-position: 50% 50%;
+            background-size: cover;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            display: none;
+        }
+        /* 分数 */
+        .score {
+            height: 50px;
+            width: 150px;
+            position: absolute;
+            top: 450px;
+            left: 0px;
+            background-color: rgba(0, 0, 0, 0);
+            color: aliceblue;
+            z-index: 2;
+            font-size: 28px;
+            line-height: 50px;
+            text-align: center;
+        }
+
+        .src {
+            height: 500px;
+            width: 800px;
+            background-image: url(./img/src.jpg);
+            background-position: 50% 50%;
+            background-size: cover;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+        }
+        .start {
+            height: 60px;
+            width: 150px;
+            position: absolute;
+            top: 500px;
+            left: 0px;
+            background-image: url(./img/time1.png);
+            background-position: 50% 50%;
+            background-size: cover;
+            position: absolute;
+            z-index: 2;
+            font-size: 28px;
+            line-height: 50px;
+            text-align: center;
+        }
+        .canvasfather{
+            position: absolute;
+            display: none;
+            top: 0px;
+            left: 0px;
+            background-color: rgba(0, 0, 0, 0.9);
+            width: 800px;
+            height: 500px;
+            flex-flow: hidden;
+        }
+        #canvas {
+
+            transform: rotate(350deg);
+            display: none;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+
+        }
+        .success {
+            width: 800px;
+            height: 500px;
+            background-image: url(./img/success.gif);
+            background-position: 50% 50%;
+            background-size: cover;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="interface">
+        <div class="bgc"></div>
+        <div class="bird"></div>
+        <div class="start"></div>
+        <div class="score">分数：</div>
+        <div class="src"> </div>
+        <div class="music">
+            <audio src="./mp3/fly.mp3" loop></audio>
+            <audio src="./mp3/pang.mp3"></audio>
+            <audio src="./mp3/pass.mp3"></audio>
+        </div>
+        <div class="canvasfather">
+            <canvas id="canvas" width="800px" height="500px">
+                当前浏览器不支持Canvas，请更换浏览器后再试
+            </canvas>
+        </div>
+        
+        <div class="success"></div>
+    </div>
+
+    <script src="bgj.js"></script>
+    <script src="canvas.js"></script>
+
+
+
+    <script>
+        window.onload = function () {
+            document.querySelector('.start').onclick = function () {
+                let pillar = new Createpillar('.interface');
+                let canvas = new Canvas('.interface');
+                pillar.canvasObj = canvas;
+                document.querySelector('.bird').style.display = 'block';
+                document.querySelector('.bird').style.top = '0px';
+                document.querySelector('.bird').style.left = '0px';
+                document.querySelector('.src').style.display = 'none';
+                document.querySelector('.bgc').innerHTML = '';
+                document.querySelector('#canvas').style.display = 'none';
+                document.querySelector('.canvasfather').style.display = 'none';
+                document.querySelector('.success').style.display = 'none';
+                pillar.pillar();
+                pillar.run();
+                pillar.bird1();
+                
+            }
+        }
+    </script>
+
+</body>
+
+</html>

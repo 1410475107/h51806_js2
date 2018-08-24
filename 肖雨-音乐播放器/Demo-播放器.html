@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>播放器</title>
+		<link rel="stylesheet" type="text/css" href="css/player.css" />
+	</head>
+
+	<body>
+		<div class="player">
+			<audio src="audio/美人鱼-林俊杰.mp3"></audio>
+
+			<div class="play_box">
+				<div class="song_songer"></div>
+				<div class="lrc_box">
+					<ul class="lrc_list"></ul>
+				</div>
+			</div>
+
+			<div class="songs">
+				<ul class="song_list"></ul>
+			</div>
+
+			<div class="foot">
+				<ul class="btns">
+					<li class="previous"></li>
+					<li class="pause_play pause"></li>
+					<li class="next"></li>
+				</ul>
+				<div class="progress">
+					<div class="play_info">
+						<div class="song_name"></div>
+						<div class="play_time"></div>
+					</div>
+					<div class="tiao play_tiao">
+						<div class="now play_now"></div>
+						<div class="point play_point"></div>
+					</div>
+				</div>
+				<div class="voice">
+					<div class="laba laba_has"></div>
+					<div class="tiao voice_tiao">
+						<div class="now voice_now"></div>
+						<div class="point voice_point"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="js/lrcs.js"></script>
+		<script type="text/javascript">
+			let audio = document.querySelector('audio');
+			let song_list = document.querySelector('.song_list')
+			let lrc_list = document.querySelector('.lrc_list');
+			let pause_play = document.querySelector('.pause_play');
+			let laba = document.querySelector('.laba');
+			let song_songer = document.querySelector('.song_songer');
+			let previous = document.querySelector('.previous');
+			let next = document.querySelector('.next');
+			let song_name = document.querySelector('.song_name');
+			let play_time = document.querySelector('.play_time');
+			let play_tiao = document.querySelector('.play_tiao');
+			let play_now = document.querySelector('.play_now');
+			let voice_tiao = document.querySelector('.voice_tiao');
+			let voice_now = document.querySelector('.voice_now');
+			let play_point = document.querySelector('.play_point');
+			let voice_point = document.querySelector('.voice_point');
+
+			let index = 0; //当前播放歌曲下标
+			let flag1 = false; //默认不播放
+			let flag2 = true; //默认不静音
+
+			addSong();
+			audio.src = songs[index].src;
+
+			//将所有歌曲放到列表中
+			function addSong() {
+				for(let i = 0; i < songs.length; i++) {
+					let li = document.createElement('li');
+					li.innerText = songs[i].song;
+					li.style.marginBottom = '30px';
+
+					let img = document.createElement('img');
+					img.src = 'img/wave.gif';
+					img.style.display = 'none';
+					li.appendChild(img);
+					song_list.appendChild(li);
+				}
+			}
+
+			//上一曲
+			previous.onclick = function() {
+				index--;
+				if(index == -1) {
+					index = songs.length - 1
+				}
+				index %= songs.length;
+				audio.src = songs[index].src;
+				flag1 = false;
+				pause_play.click();
+				fimg();
+			}
+			//下一曲
+			next.onclick = function() {
+				index++;
+				index %= songs.length;
+				audio.src = songs[index].src;
+				flag1 = false;
+				pause_play.click();
+				fimg();
+			}
+
+			//给正在播放的歌曲前面加标记
+			let lis = song_list.querySelectorAll('li');
+
+			function fimg() {
+				for(let i = 0; i < lis.length; i++) {
+					lis[i].children[0].style.display = 'none';
+				}
+				lis[index].children[0].style.display = 'block';
+			}
+
+			//点击播放、暂停
+			pause_play.onclick = function() {
+				if(flag1 == false) { //播放
+					pause_play.classList.remove('pause');
+					pause_play.classList.add('play');
+					audio.play();
+					lis[index].children[0].style.display = 'block';
+
+					addLrc();
+					flag1 = true;
+				} else { //暂停
+					pause_play.classList.remove('play');
+					pause_play.classList.add('pause');
+					lis[index].children[0].style.display = 'none';
+
+					audio.pause();
+					flag1 = false;
+				}
+			}
+
+			//加入歌词
+			function addLrc() {
+				song_songer.innerText = songs[index].song;
+				song_name.innerText = songs[index].song;
+				console.log(index)
+				let lrc_time = [];
+				let lrcArr = songs[index].lrc.split(/\r\n|\r|\n/g);
+				let lrcreg = /\[(\d{2}):(\d{2})\.(\d{2,3})\](.*)/;
+				lrc_list.innerHTML = '';
+				lrcArr.forEach(lrc => {
+					if(lrc) { //歌词文件里面有空白行
+						let r = lrcreg.exec(lrc);
+						if(r) {
+							let time = (r[1] * 60 + r[2] * 1) * 1000 + r[3] * 10;
+							lrc_time.push([time, r[4]]) //把时间和歌词存入数组
+							let li = document.createElement('li');
+							li.innerText = r[4];
+							lrc_list.appendChild(li);
+						}
+					}
+				})
+
+				let oo = {};
+				let y = 0;
+				let sid = setInterval(function() {
+					for(let i = 0; i < lrc_time.length; i++) {
+						if((i != lrc_time.length - 1) && lrc_time[i][0] <= audio.currentTime * 1000 && lrc_time[i + 1][0] > audio.currentTime * 1000) {
+							for(let j = 0; j < i; j++) {
+								lrc_list.children[j].style.color = 'rgba(255,255,255,0.8)';
+								lrc_list.children[j].style.fontSize = '14px';
+								lrc_list.children[j].style.transition = 'all 0.5s';
+							}
+							lrc_list.children[i].classList.add('focus');
+							if(!oo.hasOwnProperty(i)) { //如果对象没有属性i
+								if(i < 5) {
+									y = 0;
+								} else if(i >= 5 && i < lrc_time.length - 2) {
+									y = -33 * (i - 4);
+								} else {
+									y = -33 * (i - 6);
+								}
+								lrc_list.style.transform = 'translateY(' + y + 'px)';
+								lrc_list.style.transition = 'transform 0.5s';
+							}
+							oo[i] = 1; //给对象添加属性i
+							break;
+						}
+						if(i == lrc_time.length - 1) {
+							for(let j = 0; j < i; j++) {
+								lrc_list.children[j].style.color = 'rgba(255,255,255,0.8)';
+								lrc_list.children[j].style.fontSize = '14px';
+								lrc_list.children[j].style.transition = 'all 0.5s';
+							}
+							lrc_list.children[i].classList.add('focus');
+						}
+					}
+					
+					if(audio.currentTime==audio.duration){//播完自动循环
+						next.click();
+					}
+				}, 300)
+			} //设置时间格式
+			function conversion(value) {
+				let minute = Math.floor(value / 60);
+				minute = minute.toString().length === 1 ? ('0' + minute) : minute;
+				let second = Math.round(value % 60);
+				second = second.toString().length === 1 ? ('0' + second) : second;
+				return `${minute}:${second}`;
+			}
+
+			//改变进度条
+			play_tiao.addEventListener('click', function(event) {
+				let coordStart = this.getBoundingClientRect().left;
+				let coordEnd = event.pageX;
+				let p = (coordEnd - coordStart) / this.offsetWidth;
+				play_now.style.width = p.toFixed(3) * 100 + '%';
+				play_point.style.left = coordEnd - coordStart + 'px';
+
+				audio.currentTime = p * audio.duration;
+				audio.play();
+				flag1 = false;
+				pause_play.click();
+			})
+
+			setInterval(() => {
+				play_time.innerHTML = conversion(audio.currentTime) + '/' + conversion(audio.duration);
+				play_now.style.width = audio.currentTime / audio.duration.toFixed(3) * 100 + '%';
+				play_point.style.left = audio.currentTime / audio.duration.toFixed(3) * 100 + '%';
+			}, 1000)
+
+			//改变声音
+			voice_now.style.width = audio.volume * 100 + '%';
+			voice_point.style.left = audio.volume * 100 + '%';
+			voice_tiao.addEventListener('click', function(event) {
+				let coordStart = this.getBoundingClientRect().left;
+				let coordEnd = event.pageX;
+				let p = (coordEnd - coordStart) / this.offsetWidth;
+				voice_now.style.width = p.toFixed(3) * 100 + '%';
+				voice_point.style.left = coordEnd - coordStart + 'px';
+				audio.volume = p.toFixed(3);
+
+			})
+
+			//点击静音、不静音
+			laba.onclick = function() {
+				if(flag2 == false) { //静音
+					laba.classList.remove('laba_no');
+					laba.classList.add('laba_has');
+					audio.muted = false;
+					flag2 = true;
+				} else {
+					laba.classList.remove('laba_has');
+					laba.classList.add('laba_no');
+					audio.muted = true;
+					flag2 = false;
+				}
+			}
+
+			song_list.onclick = (event) => {
+				for(let i = 0; i < song_list.children.length; i++) {
+					if(event.target == song_list.children[i]) {
+						index = i;
+						audio.src = songs[index].src;
+						flag1 = false;
+						pause_play.click();
+						fimg();
+
+					}
+				}
+			}
+		</script>
+
+	</body>
+
+</html>

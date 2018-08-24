@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>开心撞球</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: rgb(65, 53, 53);
+            opacity: 0.9;
+            color: azure;
+        }
+
+        html {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            height: 600px;
+
+        }
+
+        body {
+            /* overflow: hidden; */
+            /*inherit   继承 */
+            height: inherit;
+            position: relative;
+
+        }
+
+
+        .outer {
+            background-color: rgb(238, 237, 236);
+            margin: 10px auto;
+            border: 2px solid rgb(100, 102, 100);
+            position: relative;
+            width: 800px;
+        }
+
+        #mydiv {
+            height: 600px;
+            width: 500px;
+            position: relative;
+        }
+
+        .menu {
+            position: absolute;
+            top: 0px;
+            left: 500px;
+            width: 300px;
+            height: 100%;
+            background-color: rgb(99, 94, 94);
+            border-left: 2px solid rgb(100, 102, 100);
+        }
+
+        h1 {
+            font-size: 2em;
+            /* letter-spacing  字符间距 */
+            letter-spacing: 2px;
+            position: absolute;
+            top: 0px;
+            left: 50px;
+
+            text-shadow: 0 0 4px white;
+            line-height: 58px;
+
+        }
+
+        .menu .up {
+
+            margin-top: 110px;
+            margin-right: 35px;
+
+        }
+
+        .menu .up li {
+
+            font-size: 20px;
+            margin: 40px 0px;
+            padding: 10px;
+            text-align: center;
+            border-radius: 10px;
+            border: 1px solid rgb(175, 182, 175);
+            list-style: none;
+        }
+
+        .Bars {
+            width: 100%;
+            height: 500px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+        }
+
+        .bar {
+            width: 40px;
+            height: 20px;
+            border-radius: 2px;
+            position: absolute;
+
+
+        }
+
+        #canvas {
+
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+
+        .boardTo {
+            width: 100px;
+            height: 10px;
+            border-radius: 5px;
+            position: absolute;
+            bottom: 20px;
+            left: 40%;
+            background-color: blueviolet;
+        }
+
+        img {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 20px;
+            left: 48%;
+        }
+
+        .overimg {
+            width: 300px;
+            height: 200px;
+            border-radius: 0px;
+            position: absolute;
+            left: 90px;
+            top: 130px;
+            bottom: 0;
+            right: 0;
+            display: none;
+            transition: all 2s ease-in-out;
+        }
+
+        .score {
+            font-size: 20px;
+            color: #999;
+            position: absolute;
+            left: 5px;
+            top: 2px;
+            transition: all 1s;
+        }
+
+        .down li {
+            float: left;
+            margin: 10px;
+            list-style: none;
+            border: 1px solid rgb(175, 182, 175);
+            padding: 5px 10px;
+            border-radius: 5px;
+
+        }
+
+        .restart {
+            width: 150px;
+            height: 40px;
+            background-color: #aeb78f;
+            position: absolute;
+            left: 180px;
+            top: 200px;
+            font-size: 20px;
+            border-radius: 20px;
+            line-height: 40px;
+            text-align: center;
+
+
+        }
+
+        .menu li:hover {
+            border: 1px solid rgb(100, 102, 100);
+            background-color: #999;
+        }
+
+        .audio {
+            width: 58px;
+            height: 58px;
+            display: inline-block;
+            background: url(./img/music.png) center center no-repeat;
+            background-size: cover;
+
+        }
+
+        .dec {
+            position: absolute;
+            left: 50px;
+            top: 100px;
+            bottom: 100px;
+            right: 50px;
+
+            color: #999;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="outer">
+
+
+        <div id="mydiv">
+
+            <div class="Bars"></div>
+            <img src="./img/ball1.jpg">
+            <span class="score">得分：0分</span>
+
+            <img src="./img/gameover.png" class="overimg">
+            <div class="boardTo"></div>
+            <canvas id="canvas" height='10' width='500'></canvas>
+        </div>
+
+        <div class="menu">
+            <audio loop data-src="http://music.163.com/song/media/outer/url?id=570132913.mp3" src="http://music.163.com/song/media/outer/url?id=570137117.mp3"
+                id="audio"></audio>
+
+            <h1>开心
+                <div class="audio"></div>撞球</h1>
+            <ul class="up">
+                <li class="start">开始游戏</li>
+                <li class="pause">暂停游戏</li>
+                <li class="end">结束游戏</li>
+            </ul>
+            <ul class="down">
+                <li>关卡1</li>
+                <li>关卡2</li>
+                <li>关卡3</li>
+                <li>关卡4</li>
+                <li>关卡5</li>
+                <li>关卡6</li>
+                <li>关卡7</li>
+                <li class="more">敬请期待</li>
+            </ul>
+
+        </div>
+    </div>
+    <script src="./js/common.js"></script>
+    <script src="./js/Ball.js"></script>
+
+    <script>
+        let ball = new Ball();
+        
+        ball.numLis();
+        ball.boardBar();
+        ball.moveBoard();
+        ball.startGame();
+        ball.music();
+        ball.BarDispear();
+    </script>
+</body>
+
+</html>

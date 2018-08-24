@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>画时钟</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		body{
+			background-color: black;
+		}
+		#cas{
+			margin: 100px;
+			border: 10px solid #ccc;
+			background-color: #fff;
+
+		}
+	</style>
+</head>
+<body>
+	<canvas id="cas" width="400px" height="400px"></canvas>
+	<script>
+
+		let cas=document.querySelector('#cas');
+		let draw=cas.getContext('2d');
+		function toDraw(){
+			let x=200;
+			let y=200;
+			let r=150;
+
+			draw.clearRect(0,0,draw.width,draw.height);
+
+			let sDate=new Date();
+			let sHours=sDate.getHours();
+			let sMin=sDate.getMinutes();
+			let sSen=sDate.getSeconds();
+
+			let sHoursValue=(-90+sHours*30+sMin/2)*Math.PI/180;
+			let sMinValue=(-90+sMin*6)*Math.PI/180;
+			let sSenValue=(-90+sSen*6)*Math.PI/180;
+		// draw.move(x,y);
+		// draw.arc(x,y,r,0,6*Math.PI/180,false);
+		//60个小刻度
+			draw.beginPath();
+			for(let i=0;i<60;i++){
+			draw.moveTo(x,y);
+			draw.arc(x,y,r,6*i*Math.PI/180,6*(i+1)*Math.PI/180,false)
+			}
+			draw.closePath();
+			draw.stroke();
+			//盖白色圆盘
+			draw.fillStyle='white';
+			draw.beginPath();
+			draw.moveTo(x,y);
+			draw.arc(x,y,r*19/20,0,360*Math.PI/180,false);
+			draw.closePath();
+			draw.fill();
+             //12个大刻度
+             draw.lineWidth=3;
+             draw.beginPath();
+             for(let i=0;i<12;i++){
+             	draw.moveTo(x,y);
+             	draw.arc(x,y,r,30*i*Math.PI/180,30*(i+1)*Math.PI/180,false)
+             }
+             	draw.closePath();
+            	draw.stroke();
+
+            //再盖白色小圆盘
+			draw.fillStyle='white';
+			draw.beginPath();
+			draw.moveTo(x,y);
+			draw.arc(x,y,r*18/20,0,360*Math.PI/180,false);
+			draw.closePath();
+			draw.fill();
+			//做时针
+			draw.lineWidth=5;
+			draw.beginPath();
+			draw.moveTo(x,y);
+			draw.arc(x,y,r*10/20,sHoursValue,sHoursValue,false)
+			draw.closePath();
+			draw.stroke();
+			//做分针
+			draw.lineWidth=3;
+			draw.beginPath();
+			draw.moveTo(x,y);
+			draw.arc(x,y,r*13/20,sMinValue,sMinValue,false)
+			draw.closePath();
+			draw.stroke();
+			//做秒针
+			draw.lineWidth=1;
+			draw.beginPath();
+			draw.moveTo(x,y);
+			draw.arc(x,y,r*17/20,sSenValue,sSenValue,false)
+			draw.closePath();
+			draw.stroke();
+
+	    draw.fillStyle='#f01';
+        draw.font='bolder 20px 楷体';
+        //水平方向文字信息和坐标点的对齐方式
+        // draw.textAlign='start';
+        //垂直方向的对齐方式
+        // draw.textBaseline='bottom';
+        draw.fillText('画家：张明浩 2018-8-15 作', 100, 380);
+        // draw.moveTo(200, 380);
+        // draw.lineTo(300, 380);
+        draw.stroke();
+         }
+         setInterval(toDraw,1000);
+         toDraw();
+
+     </script>
+ </body>
+ </html>

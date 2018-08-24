@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>游戏</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		body {
+			background-color: beige;
+		}
+		.box {
+			position: absolute;
+			left: calc(50% - 300px);
+			top: 20px;
+		}
+		#cv {
+			background-color: #red;
+			background-image: url(imgs/bg2.jpg);
+			background-repeat: no-repeat;
+			background-position: center;
+		}
+		.control {
+			list-style-type: none;
+			width: 400px;
+			margin: 0px auto;
+		}
+		.control li {
+			float: left;
+			margin-right: 20px;
+			width: 100px;
+			height: 30px;
+			line-height: 30px;
+			border-radius: 25px;
+			border: 1px solid black;
+			text-align: center;
+			cursor: pointer;
+		}
+		
+		#score {
+			position: absolute;
+			top: 10px;
+			left: 5px;
+			z-index: 99;
+			color: red;
+			font-size: 20px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="box">
+		<canvas id="cv" width="600" height="500"></canvas>
+		<ul class="control">
+			<li id="start">开始游戏</li>
+			<li id="pause">暂停游戏</li>
+			<li id="end">结束游戏</li>
+		</ul>
+		<div id="score">
+			<span>分数：</span>
+			<span id="s">0</span>
+		</div>
+		<audio src="./audios/game.mp3" loop="true" id="game"></audio>
+		<audio src="./audios/explosion2.wav" id="blast"></audio>
+		<audio src="./audios/shoot.mp3" id='bullet'></audio>
+	</div>
+	<script src="./aircraft.js" type="text/javascript"></script>
+	<script src="./play.js" type="text/javascript"></script>
+</body>
+
+</html>

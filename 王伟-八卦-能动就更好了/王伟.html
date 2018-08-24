@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#mycanvas {
+				border: 1px solod black;
+				background: #CCCCCC;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="mycanvas" width="500px" height="500px"></canvas>
+		<script type="text/javascript">
+		var mycanvas=document.querySelector("#mycanvas");
+		var context=mycanvas.getContext("2d");
+		
+		context.fillStyle="black"
+		context.strokeStyle="black";
+		context.beginPath()
+
+        context.arc(250, 250, 100, Math.PI / 180 * 0, Math.PI / 180 * 360, false);
+        context.arc(250, 250, 100, Math.PI / 180 * 90, Math.PI / 180 * 270, false);
+		context.stroke()
+		context.fill()
+		
+		
+		
+		context.beginPath()
+		context.fillStyle="white"
+		context.strokeStyle="black";
+        context.arc(250, 250, 83, Math.PI / 180 * 80, Math.PI / 180 * 260, false);
+		context.stroke()
+		context.fill()
+		
+		context.beginPath()
+		context.moveTo(250,207)
+		context.fillStyle="white"
+        context.arc(250, 207, 15, Math.PI / 180 * 0, Math.PI / 180 * 360, false);
+		context.stroke()
+		context.fill()
+		
+		
+		context.beginPath()
+		context.fillStyle="black"
+		context.moveTo(250,207)
+        context.arc(250, 207, 42, Math.PI / 180 * 90, Math.PI / 180 * 250, false);
+		context.stroke()
+		context.fill()
+		
+	
+		context.beginPath()
+		context.fillStyle="white"
+		context.moveTo(250,207)
+        context.arc(250, 207, 15, Math.PI / 180 * 0, Math.PI / 180 * 360, false);
+		context.stroke()
+		context.fill()
+		
+		
+		context.beginPath()
+		context.fillStyle="white"
+		context.moveTo(250,292)
+        context.arc(250, 292, 42.1, Math.PI / 180 * 70, Math.PI / 180 * 270, true);
+//		context.stroke()
+		context.fill()
+		
+			
+		context.beginPath()
+		context.fillStyle="black"
+		context.moveTo(250,292)
+        context.arc(250, 292, 15, Math.PI / 180 * 0, Math.PI / 180 * 360, false);
+		context.stroke()
+		context.fill()
+		
+//		context.closePath()
+		</script>
+	</body>
+</html>

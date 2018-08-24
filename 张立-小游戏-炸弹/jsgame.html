@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>jsgame</title>
+		<link rel="stylesheet" type="text/css" href="css/jsgame.css"/>
+		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	</head>
+	<body>
+		<div id="all">
+			<div id="menu">
+				<button class="btn btn-danger" id="start">开始</button>
+				<p id="scole">炸弹威力：1级</p>
+		
+				人物选择：
+				<select id="hero">
+					<option>选择英雄</option>
+					<option>暴力蛙</option>
+					<option>鸣人</option>
+					<option>佐助</option>
+				</select>
+			</div>
+			<div id="d1">
+				<canvas id="can1" width="600px" height="520px" ></canvas>
+			</div>
+		</div>
+		
+		<script src="js/man.js"></script>
+		<script src="js/ground.js"></script>
+		<script>
+			window.onload=function(){
+				let  manobj;
+				var  groundobj;
+				let can1 = document.querySelector("#can1");
+				let outbox=document.querySelector("#d1");
+				let scole = document.querySelector("#scole");
+				let hero = document.querySelector("#hero")
+				//箱子的摆放
+				groundobj=new Ground(outbox);
+				groundobj.box1.src='img/box1.jpg';
+				groundobj.box();
+				
+				
+				//点开始按钮
+				document.querySelector("#start").onclick=function (){
+					manobj1=new Man(outbox,groundobj);
+					//人物运动
+					manobj1.move();
+					//炸弹范围
+					// manobj1.boomlen=2;
+					//艺术就是爆炸
+					manobj1.boom();
+					if(hero.value=="暴力蛙"){
+						//一号人物选择
+						manobj1.man.src="img/guagua.png";
+						//人物切图
+						//呱呱宽96，高96，每个格子宽高24
+						manobj1.loca={sx:0,sy:0,sw:24,sh:24,dx:0,dy:0,dw:40,dh:40};
+						//人物运动按键
+						manobj1.direction1=[37,38,39,40,13];
+
+					} else if(hero.value=="鸣人"){
+						//人物选择
+						manobj1.man.src="img/鸣人.png";
+						//人物切图
+						//鸣人宽128,高192,每个格子宽32,高48.
+						manobj1.loca={sx:0,sy:0,sw:32,sh:48,dx:0,dy:0,dw:40,dh:40};
+						//人物运动按键
+						manobj1.direction1=[37,38,39,40,13];
+					}else if(hero.value=="佐助"){
+						//人物选择
+						manobj1.man.src="img/佐助.png";
+						//人物切图
+						//鸣人宽128,高192,每个格子宽32,高48.
+						manobj1.loca={sx:0,sy:0,sw:32,sh:48,dx:0,dy:0,dw:40,dh:40};
+						//人物运动按键
+						manobj1.direction1=[37,38,39,40,13];
+					}
+					
+				}
+				
+			}
+			
+		</script>
+	</body>
+</html>
